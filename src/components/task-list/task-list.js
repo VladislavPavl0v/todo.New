@@ -3,18 +3,18 @@ import Task from '../task'
 
 import './task-list.css'
 
-const TaskList = (props) => {
-  const todos = props.todos;
+const TaskList = ({todoItem, onDeleted}) => { //добавил функцию onDeleted для удаления 
+
 
 
   return <ul className="todo-list">
-    {todos.map(item => (
+    {todoItem.map(item => (
       <Task
         status={item.status}
         key={item.id}
-        description={item.description}
+        label={item.label}
         created={item.created}
-        important={item.important}
+        onDeleted ={()=> onDeleted(item.id)}
       />
     ))}
 
