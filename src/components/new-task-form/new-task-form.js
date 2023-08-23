@@ -4,15 +4,33 @@ import './new-task-form.css'
 
 
 export default class NewTaskForm extends Component {
-  /*const SearchText = 'Type here to search';
-  const searchStyle = {
-    fontSize: '20px'
-  };*/
+  state = {
+    label: ""
+  };
+  onLabelChange = (e) => {
+    this.setState({
+      //с помощью e.target.value достаем текуущее значение
+      label: e.target.value
+    })
+  };
+  onSubmit = (e) => {
+    //когда браузер обновляеться не нужно выпонять действие по умочанию
+    e.preventDefault();
+    this.props.addItem(this.state.label)
+    //добавляем пустую строчку
+    this.setState({
+   label:''
+    });
+  }
   render() {
     return (
-      <input className="new-todo" placeholder="What needs to be done?" autoFocus 
-        onClick={()=> this.props.addItem('Привет мир')}
-      />
+      <form onSubmit={this.onSubmit}>
+        <input type="text" className="new-todo" placeholder="What needs to be done?" autoFocus
+          onChange={this.onLabelChange}
+        //обновляем value
+          value={this.state.label}
+        />
+      </form>
     )
   }
 };

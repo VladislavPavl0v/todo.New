@@ -3,7 +3,7 @@ import Task from '../task'
 
 import './task-list.css'
 
-const TaskList = ({todoItem, onDeleted}) => { //добавил функцию onDeleted для удаления 
+const TaskList = ({ todoItem, onDeleted, onToggleDone }) => { //добавил функцию onDeleted для удаления 
 
 
 
@@ -14,7 +14,9 @@ const TaskList = ({todoItem, onDeleted}) => { //добавил функцию on
         key={item.id}
         label={item.label}
         created={item.created}
-        onDeleted ={()=> onDeleted(item.id)}
+        onDeleted={() => onDeleted(item.id)}
+        onToggleDone={() => onToggleDone(item.id)}
+        done={item.done}
       />
     ))}
 
