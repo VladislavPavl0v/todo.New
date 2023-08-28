@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --debug src/**/*.jsx",
-    "lint:write": "eslint --debug src/**/*.jsx --fix",
+    "lint:write": "eslint --debug src/**/*.jsx --fix --color",
     "prettier": "prettier --write src/**/*.jsx"
   },
   "prettier": {
