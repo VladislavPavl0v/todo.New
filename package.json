@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --debug src/**/*.jsx",
-    "lint:fix": "eslint --debug src/**/*.jsx --fix",
+    "lint:write": "eslint --debug src/**/*.jsx --fix",
     "prettier": "prettier --write src/**/*.jsx"
   },
   "prettier": {
@@ -38,7 +38,7 @@
   },
   "lint-staged": {
     "*.(js|jsx)": [
-      "npm run lint:fix",
+      "npm run lint:write",
       "npm run prettier",
       "git add"
     ]
