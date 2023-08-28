@@ -9,7 +9,7 @@ import TaskList from '../task-list/task-list';
 import Footer from '../footer';
 import './app.css';
 
-export default class App extends Component
+export default class App extends Component {
   maxId = 100;
 
   state = {

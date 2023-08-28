@@ -18,10 +18,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --debug src/**/*.js",
-    "lint:write": "eslint --debug src/**/*.js --fix --color",
-    "prettier": "prettier --write src/**/*.js",
-    "prepare": "husky install"
+    "lint": "eslint --debug src/**/*.jsx",
+    "lint:write": "eslint --debug src/**/*.jsx --fix --color",
+    "prettier": "prettier --write src/**/*.jsx",
+    "prepare": "husky install",
+    "format": "prettier --write src/**/*.jsx"
   },
   "prettier": {
     "printWidth": 100,
@@ -40,7 +41,7 @@
   "lint-staged": {
     "*.(js|jsx)": [
       "npm run lint:write",
-      "npm run prettier",
+      "npm run format",
       "git add"
     ]
   },
