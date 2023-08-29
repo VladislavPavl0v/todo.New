@@ -5,13 +5,13 @@ module.exports = {
     node: true,
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
-    'google',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:prettier/recommended',
-    'prettier',
     'airbnb',
+    "eslint:recommended",
+    'prettier',
   ],
   overrides: [
     {
