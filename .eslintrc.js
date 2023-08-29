@@ -5,12 +5,11 @@ module.exports = {
     node: true,
   },
   extends: [
-    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'airbnb',
-    "eslint:recommended",
+    'eslint:recommended',
     'prettier',
   ],
   overrides: [
