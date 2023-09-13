@@ -6,8 +6,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TasksFilter from '../task-filter';
 
-import './footer.css';
-
 function Footer({ todoCount, filter, onFilterChange, onClearCompleted }) {
   return (
     <footer className="footer">

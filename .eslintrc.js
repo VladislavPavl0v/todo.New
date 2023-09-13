@@ -42,5 +42,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     'react/destructuring-assignment': 'off',
     'react/static-property-placement': 'off',
+    'react/no-unused-state': 'off',
   },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
@@ -6,8 +7,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-
-import './task.css';
+import Timer from '../timer';
 
 export default class Task extends Component {
   static defaultProps = {
@@ -65,7 +65,8 @@ export default class Task extends Component {
   };
 
   render() {
-    const { label, onDeleted, done } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { label, onDeleted, done, onStartTimer, onStopTimer, minutes, seconds } = this.props;
     const { edited, newLabel, createdFormat } = this.state;
     let classNames = '';
     classNames += done ? ' completed' : '';
@@ -74,9 +75,15 @@ export default class Task extends Component {
       <li className={`${classNames}`}>
         <div className="view">
           <input className="toggle" checked={done} type="checkbox" onChange={this.CheckboxChange} />
-          <label onClick={this.CheckboxChange}>
-            <span className="description">{label}</span>
-            <span className="created">{`created ${createdFormat} ago`}</span>
+          <label /* onClick={this.CheckboxChange} */>
+            <span className="title">{label}</span>
+            <Timer
+              onStartTimer={onStartTimer}
+              onStopTimer={onStopTimer}
+              minutes={minutes}
+              seconds={seconds}
+            />
+            <span className="description">{`created ${createdFormat} ago`}</span>
           </label>
           <button className="icon icon-edit" onClick={this.enableEdit} />
           <button className="icon icon-destroy" onClick={onDeleted} />

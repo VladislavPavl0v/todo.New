@@ -19,16 +19,29 @@ export default class App extends Component {
     created: new Date(),
   };
 
+  /* componentDidMount() {
+    this.updateTime();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  } */
+
   createTodoItem = (label) => ({
     label,
     done: false,
     id: this.maxId++,
     status: '',
+    timeStarted: false,
+    minutes: '',
+    seconds: '',
   });
 
   // добавлепие элемента
-  addItem = (text) => {
-    const newItem = this.createTodoItem(text);
+  addItem = (text, minutes, seconds) => {
+    const newItem = this.createTodoItem(text); // Передаем только 'text' как аргумент
+    newItem.minutes = minutes; // Присваиваем значения 'minutes' и 'seconds' напрямую newItem
+    newItem.seconds = seconds;
     newItem.created = new Date();
     this.setState(({ todoItem }) => {
       const newArr = [...todoItem, newItem];
@@ -127,6 +140,64 @@ export default class App extends Component {
     });
   };
 
+  // Добавьте методы startTimer и stopTimer
+  startTimer = (id) => {
+    this.setState(({ todoItem }) => {
+      const idx = todoItem.findIndex((el) => el.id === id);
+      const updatedTodoItem = [...todoItem];
+      updatedTodoItem[idx].timeStarted = true;
+      return {
+        todoItem: updatedTodoItem,
+      };
+    });
+
+    // Запустите таймер с использованием setInterval
+    const timerId = setInterval(() => {
+      this.updateTime(id); // Метод для обновления времени
+    }, 1000);
+
+    // Сохраните идентификатор таймера в состоянии для дальнейшего управления
+    this.setState({ timerId });
+  };
+
+  stopTimer = (id) => {
+    clearInterval(this.state.timerId); // Остановите таймер
+
+    this.setState(({ todoItem }) => {
+      const idx = todoItem.findIndex((el) => el.id === id);
+      const updatedTodoItem = [...todoItem];
+      updatedTodoItem[idx].timeStarted = false;
+      return {
+        todoItem: updatedTodoItem,
+      };
+    });
+  };
+
+  updateTime = (id) => {
+    this.setState(({ todoItem }) => {
+      const idx = todoItem.findIndex((el) => el.id === id);
+      const updatedTodoItem = [...todoItem];
+      const item = updatedTodoItem[idx];
+
+      if (item.timeStarted) {
+        if (item.seconds > 0) {
+          item.seconds -= 1;
+        } else if (item.minutes > 0) {
+          item.minutes -= 1;
+          item.seconds = 59;
+        }
+
+        if (item.minutes === 0 && item.seconds === 0) {
+          item.timeStarted = false; // Остановить таймер, когда время истекло
+        }
+      }
+
+      return {
+        todoItem: updatedTodoItem,
+      };
+    });
+  };
+
   render() {
     const { todoItem, filter, term } = this.state;
     const vusableItems = this.filter(this.search(todoItem, term), filter);
@@ -141,6 +212,7 @@ export default class App extends Component {
           <h1>todos</h1>
           <NewTaskForm addItem={this.addItem} />
         </header>
+
         <section className="main">
           <TaskList
             todoItem={vusableItems}
@@ -148,6 +220,8 @@ export default class App extends Component {
             onToggleDone={this.onToggleDone}
             onChangeLabel={this.onChangeLabel}
             created={this.created}
+            onStartTimer={this.startTimer}
+            onStopTimer={this.stopTimer}
           />
           <Footer
             filter={filter}

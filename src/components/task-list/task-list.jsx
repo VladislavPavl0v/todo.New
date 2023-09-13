@@ -3,9 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from '../task';
 
-import './task-list.css';
-
-function TaskList({ todoItem, onDeleted, onToggleDone, onChangeLabel }) {
+function TaskList({ todoItem, onDeleted, onToggleDone, onChangeLabel, onStartTimer, onStopTimer }) {
   return (
     <ul className="todo-list">
       {todoItem.map((item) => (
@@ -13,11 +11,15 @@ function TaskList({ todoItem, onDeleted, onToggleDone, onChangeLabel }) {
           status={item.status}
           key={item.id}
           label={item.label}
+          minutes={item.minutes}
+          seconds={item.seconds}
           onDeleted={() => onDeleted(item.id)}
           onToggleDone={() => onToggleDone(item.id)}
           done={item.done}
           onChangeLabel={(label) => onChangeLabel(item.id, label)}
           created={item.created}
+          onStartTimer={() => onStartTimer(item.id)}
+          onStopTimer={() => onStopTimer(item.id)}
         />
       ))}
     </ul>
@@ -29,6 +31,8 @@ TaskList.defaultProps = {
   onDeleted: () => {},
   onToggleDone: () => {},
   onChangeLabel: () => {},
+  onStartTimer: () => {},
+  onStopTimer: () => {},
 };
 
 TaskList.propTypes = {
@@ -44,6 +48,8 @@ TaskList.propTypes = {
   onDeleted: PropTypes.func,
   onToggleDone: PropTypes.func,
   onChangeLabel: PropTypes.func,
+  onStartTimer: PropTypes.func,
+  onStopTimer: PropTypes.func,
 };
 
 export default TaskList;
