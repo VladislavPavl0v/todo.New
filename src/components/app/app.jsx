@@ -1,8 +1,4 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-undef */
 /* eslint-disable react/no-unused-class-component-methods */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable indent */
 import React, { Component } from 'react';
 import NewTaskForm from '../new-task-form';
 import TaskList from '../task-list/task-list';
@@ -19,14 +15,6 @@ export default class App extends Component {
     created: new Date(),
   };
 
-  /* componentDidMount() {
-    this.updateTime();
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  } */
-
   createTodoItem = (label) => ({
     label,
     done: false,
@@ -39,8 +27,8 @@ export default class App extends Component {
 
   // добавлепие элемента
   addItem = (text, minutes, seconds) => {
-    const newItem = this.createTodoItem(text); // Передаем только 'text' как аргумент
-    newItem.minutes = minutes; // Присваиваем значения 'minutes' и 'seconds' напрямую newItem
+    const newItem = this.createTodoItem(text);
+    newItem.minutes = minutes;
     newItem.seconds = seconds;
     newItem.created = new Date();
     this.setState(({ todoItem }) => {
@@ -151,17 +139,15 @@ export default class App extends Component {
       };
     });
 
-    // Запустите таймер с использованием setInterval
     const timerId = setInterval(() => {
-      this.updateTime(id); // Метод для обновления времени
+      this.updateTime(id);
     }, 1000);
 
-    // Сохраните идентификатор таймера в состоянии для дальнейшего управления
     this.setState({ timerId });
   };
 
   stopTimer = (id) => {
-    clearInterval(this.state.timerId); // Остановите таймер
+    clearInterval(this.state.timerId);
 
     this.setState(({ todoItem }) => {
       const idx = todoItem.findIndex((el) => el.id === id);
@@ -188,7 +174,7 @@ export default class App extends Component {
         }
 
         if (item.minutes === 0 && item.seconds === 0) {
-          item.timeStarted = false; // Остановить таймер, когда время истекло
+          item.timeStarted = false;
         }
       }
 

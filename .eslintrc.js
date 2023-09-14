@@ -5,12 +5,12 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
     'airbnb',
     'eslint:recommended',
     'prettier',
+    'plugin:react/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
   ],
   overrides: [
     {

@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -37,11 +36,10 @@ export default class NewTaskForm extends Component {
     const { addItem } = this.props;
     const { label, minutes, seconds } = this.state;
     e.preventDefault();
-
-    // Проверяем, что minutes и seconds числа перед передачей их в addItem
-    if (!isNaN(minutes) && !isNaN(seconds)) {
-      // eslint-disable-next-line radix
-      addItem(label, parseInt(minutes), parseInt(seconds));
+    if (isNaN(minutes) || isNaN(seconds) || minutes < 0 || seconds < 0 || label.length <= 0) {
+      alert('Пожалуйста, введите корректные значения для всех полей.');
+    } else {
+      addItem(label, minutes, seconds);
     }
 
     this.setState({
@@ -60,7 +58,6 @@ export default class NewTaskForm extends Component {
           placeholder="What needs to be done?"
           name="description"
           onChange={this.onLabelChange}
-          // обновляем value
           value={this.state.label}
         />
         <input

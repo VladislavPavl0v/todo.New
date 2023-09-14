@@ -17,6 +17,10 @@ export default class Task extends Component {
     done: false,
     onChangeLabel: () => {},
     created: new Date(),
+    onStartTimer: () => {},
+    onStopTimer: () => {},
+    minutes: 'Default minutes',
+    seconds: 'Default seconds',
   };
 
   static propTypes = {
@@ -26,6 +30,10 @@ export default class Task extends Component {
     done: PropTypes.bool,
     onChangeLabel: PropTypes.func,
     created: PropTypes.instanceOf(Date),
+    onStartTimer: PropTypes.func,
+    onStopTimer: PropTypes.func,
+    minutes: PropTypes.string,
+    seconds: PropTypes.string,
   };
 
   state = {
@@ -65,7 +73,6 @@ export default class Task extends Component {
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { label, onDeleted, done, onStartTimer, onStopTimer, minutes, seconds } = this.props;
     const { edited, newLabel, createdFormat } = this.state;
     let classNames = '';
@@ -75,7 +82,7 @@ export default class Task extends Component {
       <li className={`${classNames}`}>
         <div className="view">
           <input className="toggle" checked={done} type="checkbox" onChange={this.CheckboxChange} />
-          <label /* onClick={this.CheckboxChange} */>
+          <label>
             <span className="title">{label}</span>
             <Timer
               onStartTimer={onStartTimer}
