@@ -128,7 +128,7 @@ export default class App extends Component {
     });
   };
 
-  // методы startTimer и stopTimer
+  // Добавьте методы startTimer и stopTimer
   startTimer = (id) => {
     this.setState(({ todoItem }) => {
       const idx = todoItem.findIndex((el) => el.id === id);
