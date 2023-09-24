@@ -27,7 +27,7 @@ function Timer({ onStartTimer, onStopTimer, seconds, minutes }) {
 Timer.propTypes = {
   onStartTimer: PropTypes.func.isRequired,
   onStopTimer: PropTypes.func.isRequired,
-  seconds: PropTypes.number.isRequired,
-  minutes: PropTypes.number.isRequired,
+  seconds: PropTypes.string.isRequired,
+  minutes: PropTypes.string.isRequired,
 };
 export default Timer;
